@@ -779,10 +779,11 @@ class Client(object):
         :param list args: extra arguments to associate w/ the binding.
         :returns: boolean
         """
-
+        rt_key = rt_key or queue # Routing key default to queue name
         vhost = quote(vhost, '')
         exchange = quote(exchange, '')
         queue = quote(queue, '')
+        rt_key = quote(rt_key, '')
         body = json.dumps({'routing_key': rt_key, 'arguments': args or []})
         path = Client.urls['bindings_between_exch_queue'] % (vhost,
                                                              exchange,
